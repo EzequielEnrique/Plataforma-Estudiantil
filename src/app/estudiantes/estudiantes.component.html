@@ -1,0 +1,47 @@
+
+<div class="container">
+    <div class="row">
+        <div #content id="imprimir"style="width: 210mm;">
+    <div class="container">
+        <div class="row">
+            <h2>Mesas inscriptas</h2>
+           <!--  <div class="form-floating mb-3">
+                <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Buscar carrera"
+                    (keyup)="searchDNI()" />
+                <label for="floatingInput">Ingrese su DNI...</label>
+            </div> -->
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Unidad Curricular</th>
+                        <th>Llamado</th>
+                        <th>Condición</th>
+                        <th>Año de Cursado</th>
+                        <th>Turno</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let inscripcion of inscripciones">
+                        <td>{{ inscripcion.asiNombre }}</td>
+                        <td>{{ inscripcion.llaNombre }}</td>
+                        <td>{{ inscripcion.conNombre }}</td>
+                        <td>{{ inscripcion.insAnioCursado }}</td>
+                        <td>{{ inscripcion.turNombre }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+
+        </div>
+
+    </div>
+</div>
+
+<div style="display: flex; margin: 20px;">
+    <button class="btn btn-primary" (click)="generarPDF()">Descargar PDF</button>
+</div>
+    </div>
+</div>

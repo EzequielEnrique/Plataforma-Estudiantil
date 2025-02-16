@@ -1,0 +1,193 @@
+/* Fondo oscuro y centrado de la página */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #1c1c1c; /* Fondo oscuro */
+    color: #eaeaea; /* Texto claro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Logo animación */
+  .logo-animation {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInSlide 1.2s ease-out forwards;
+  }
+  
+  /* Animación de deslizamiento y aparición */
+  @keyframes fadeInSlide {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Animación del título */
+  .title-animation {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInTitle 1.5s ease-out forwards;
+  }
+  
+  /* Keyframes para la animación del título */
+  @keyframes fadeInTitle {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  
+  /* Contenedor del formulario */
+  .form1 {
+    max-width: 800px;
+    width: 100%;
+    background: #2D394B; /* Color oscuro para el fondo del formulario */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    color: #eaeaea; /* Texto claro en el formulario */
+    margin: auto; /* Centrarse horizontalmente */
+  }
+  
+  .text-center img {
+    max-width: 150px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    font-weight: bold;
+    color: #fcf9f9;
+  }
+  
+  /* Botones personalizados */
+  .btn-custom2 {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-custom2:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Estilo de formulario */
+  .form-floating {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+  .form-select {
+    width: 100%;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #030303;
+    transition: border-color 0.3s;
+    height: 70px;
+  }
+  
+  .ancho100 {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #030303;
+    transition: border-color 0.3s;
+  }
+  
+  
+  .form-select:focus, .ancho100:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .table th, .table td {
+    padding: 0.75rem;
+    border: 1px solid #444;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+  
+  .table th {
+    background-color: #3498db;
+    color: #ffffff;
+  }
+  
+  .table td {
+    background-color: #212934;
+  }
+  
+  /* Botón de selección de materias */
+  .btn.ancho100 {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
+  .btn-danger {
+    background-color: #212934;
+    color: #fff;
+  }
+  
+  .btn-success {
+    background-color: #27ae60;
+    color: #fff;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .form1 {
+      padding: 1.5rem;
+    }
+  
+    h1 {
+      font-size: 1.5rem;
+    }
+  
+    .form-select, .ancho100 {
+      font-size: 0.9rem;
+    }
+  
+    .btn-custom2 {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+    }
+  }

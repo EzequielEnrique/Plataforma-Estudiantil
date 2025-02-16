@@ -1,0 +1,155 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f3f4f6;
+    color: #333;
+  }
+  
+  h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, #0044cc, #0066ff);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  }
+  
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero-content .highlight {
+    color: #ffcc00;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .btn-primary {
+    background: #ffcc00;
+    color: #333;
+  }
+  
+  .btn-secondary {
+    background: white;
+    color: #333;
+  }
+  
+  .btn-primary:hover {
+    background: #ffdd33;
+    transform: scale(1.1);
+  }
+  
+  .btn-secondary:hover {
+    background: #f3f3f3;
+    transform: scale(1.1);
+  }
+  
+  /* Features Section */
+  .features {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 60px auto;
+    max-width: 1100px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .feature {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    flex: 1 1 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .feature img {
+    max-width: 100px;
+    margin-bottom: 20px;
+  }
+  
+  .feature h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .feature:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* About Section */
+  .about {
+    background: #f9f9f9;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .about-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .about-content .highlight {
+    color: #0044cc;
+  }
+  
+  .about-content p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .features {
+      flex-direction: column;
+    }
+  
+    .cta-buttons {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  

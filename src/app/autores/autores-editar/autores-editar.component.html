@@ -1,0 +1,38 @@
+<div class="container mt-3">
+  <br>
+  <br>
+  <br>
+  <br>
+    <h2>Editar Autor</h2>
+    <div class="input">
+      <form [formGroup]="formAutor" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="autNombre">Nombre</label>
+          <input type="text" id="autNombre" formControlName="autNombre" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="autApellido">Apellido</label>
+          <input type="text" id="autApellido" formControlName="autApellido" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="autFecNac">Fecha de Nacimiento</label>
+          <input type="date" id="autFecNac" formControlName="autFecNac" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="autBio">Biografía</label>
+          <textarea id="autBio" formControlName="autBio"></textarea>
+        </div>
+  
+        <div class="form-group">
+          <label for="autFecDes">Fecha de Defunción</label>
+          <input type="date" id="autFecDes" formControlName="autFecDes" />
+        </div>
+  
+        <button type="submit">Guardar Autor</button>
+        <button type="button" (click)="Cancelar()" class="btn btn-secondary me-2">Cancelar</button>
+      </form>
+    </div>
+  </div>

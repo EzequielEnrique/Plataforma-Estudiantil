@@ -1,0 +1,99 @@
+<br><br><br><br><br><br>
+<div>
+  <!-- Botón para crear un nuevo préstamo (solo visible si no eres estudiante) -->
+  <button *ngIf="!isStudent" (click)="abrirModal()">Nuevo Préstamo</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>DNI</th>
+        <th>Libro</th>
+        <th>Fecha Préstamo</th>
+        <th>Fecha Devolución</th>
+        <th *ngIf="!isStudent">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prestamo of prestamos">
+        <td>{{ prestamo.id }}</td>
+        <td>{{ prestamo.nombre }}</td>
+        <td>{{ prestamo.apellido }}</td>
+        <td>{{ prestamo.dni }}</td>
+        <td>{{ prestamo.libro }}</td>
+        <td>{{ prestamo.fecha_prestamo }}</td>
+        <td>{{ prestamo.fecha_devolucion || 'Sin devolución' }}</td>
+        <td *ngIf="!isStudent">
+          <button (click)="editarPrestamo(prestamo)">Editar</button>
+          <button (click)="eliminarPrestamo(prestamo.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" *ngIf="modalVisible" id="prestamoModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ editando ? 'Editar' : 'Nuevo' }} Préstamo</h5>
+          <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <!-- Solo se muestra el campo ID si estamos editando -->
+            <input type="hidden" [(ngModel)]="prestamoSeleccionado.id" name="id" />
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input [(ngModel)]="prestamoSeleccionado.nombre" class="form-control" id="nombre" name="nombre" />
+            </div>
+            <div class="mb-3">
+              <label for="apellido" class="form-label">Apellido</label>
+              <input [(ngModel)]="prestamoSeleccionado.apellido" class="form-control" id="apellido" name="apellido" />
+            </div>
+            <div class="mb-3">
+              <label for="dni" class="form-label">DNI</label>
+              <input [(ngModel)]="prestamoSeleccionado.dni" class="form-control" id="dni" name="dni" />
+            </div>
+            <div class="mb-3">
+              <label for="libro" class="form-label">Libro</label>
+              <input [(ngModel)]="prestamoSeleccionado.libro" class="form-control" id="libro" name="libro" />
+            </div>
+            <div class="mb-3">
+              <label for="fecha_prestamo" class="form-label">Fecha Préstamo</label>
+              <input [(ngModel)]="prestamoSeleccionado.fecha_prestamo" type="date" class="form-control" name="fecha_prestamo" />
+            </div>
+            <div class="mb-3">
+              <label for="fecha_devolucion" class="form-label">Fecha Devolución</label>
+              <input [(ngModel)]="prestamoSeleccionado.fecha_devolucion" type="date" class="form-control" name="fecha_devolucion" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="guardarPrestamo()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  

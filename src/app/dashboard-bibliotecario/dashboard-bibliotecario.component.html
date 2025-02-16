@@ -1,0 +1,67 @@
+<div class="dashboard-container">
+    <!-- Sección de información del usuario -->
+    <section class="user-info">
+      <br>
+      <br>
+      <br>      
+      <h1 class="display-4 mb-4">Dashboard de Bibliotecario</h1>
+      <h2>Información del usuario</h2>
+      <!-- Vista de información (por defecto visible) -->
+      <div id="user-data" *ngIf="!editMode">
+        <p><strong>Nombre:</strong> {{ persona.perNombre }}</p>
+        <p><strong>Apellido:</strong> {{ persona.perApellido }}</p>
+        <p><strong>Correo:</strong> {{ persona.perMail }}</p>
+        <p><strong>DNI:</strong> {{ persona.perDni }}</p>
+        
+        <div class="row mt-3">
+          <div class="col-12 col-md-6">
+              <button (click)="editDatosPersonales()" class="btn-logout">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                      <path
+                          d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                  </svg>
+                  Editar Datos Pesonales</button>
+                  <button (click)="cambiarContrasena()" class="btn-logout ms-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-lock-fill" viewBox="0 0 16 16">
+                        <path d="M8 1a3 3 0 0 1 3 3v3H5V4a3 3 0 0 1 3-3z"/>
+                        <path d="M3 8V6a5 5 0 0 1 10 0v2h.5A1.5 1.5 0 0 1 15 9.5v5A1.5 1.5 0 0 1 13.5 16h-11A1.5 1.5 0 0 1 1 14.5v-5A1.5 1.5 0 0 1 2.5 8H3z"/>
+                    </svg>
+                    Cambiar Contraseña
+                </button>                
+              <button (click)="logout()" class="btn-logout ms-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd"
+                          d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                      <path fill-rule="evenodd"
+                          d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                  </svg>
+                  Cerrar sesión</button>
+          </div>
+          <br>
+          <br>
+  
+    <!-- Sección de tarjetas -->
+    <section class="card-section">
+      <div class="card">
+        <h3>Gestión de Libros</h3>
+        <p>Haz clic aquí para ver, crear, eliminar o modificar libros.</p>
+        <button routerLink="/libros">Ingresar a Libros</button>
+    </div>
+
+    <div class="card">
+      <h3>Gestión de Préstamos</h3>
+      <p>Administrar los libros prestamos a estudiantes del colegio.</p>
+      <button routerLink="/prestamo">Ingresar a Préstamos</button>
+    </div>
+
+    <div class="card">
+    <h3>Gestión de Autores</h3>
+    <p>Administrar los autores de los libros.</p>
+    <button (click)="gestionarAutores()">Ingresar a Autores</button>
+    </div>
+  </section>
+  </div>
+  

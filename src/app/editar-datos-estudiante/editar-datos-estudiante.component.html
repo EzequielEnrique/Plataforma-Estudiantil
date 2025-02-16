@@ -1,0 +1,105 @@
+<br>
+<br>
+<div class="container mb-5">
+    <div class="row mt-4 mb-4 align-items-start justify-content-start">
+      <div class="col-md-10">
+        <h4 class="h4 d-flex align-items-center text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-file-person-fill me-3" viewBox="0 0 16 16">
+            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11"/>
+          </svg>
+          Datos Personales
+        </h4>
+      </div>
+    </div>
+  
+    <!-- Formulario -->
+    <div class="mt-3">
+      <form [formGroup]="formUsuario" (ngSubmit)="onSubmit()">
+        <div class="row mt-4">
+
+                    <!-- Nombre -->
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Nombre</label>
+                      <input type="text" 
+                             class="form-control" 
+                             [ngClass]="{'is-invalid': formUsuario.get('usNombre')?.invalid && formUsuario.get('usNombre')?.touched, 'is-valid': formUsuario.get('usNombre')?.valid}" 
+                             formControlName="usNombre">
+                      <div class="invalid-feedback" *ngIf="formUsuario.get('usNombre')?.hasError('required')">
+                        El nombre es obligatorio.
+                      </div>
+                      <div class="invalid-feedback" *ngIf="formUsuario.get('usNombre')?.hasError('minlength')">
+                        El nombre debe tener al menos 3 caracteres.
+                      </div>
+                    </div>
+                  </div>
+          <!-- Apellido -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Apellido</label>
+            <input type="text" 
+                   class="form-control" 
+                   [ngClass]="{'is-invalid': formUsuario.get('usApellido')?.invalid && formUsuario.get('usApellido')?.touched, 'is-valid': formUsuario.get('usApellido')?.valid}" 
+                   formControlName="usApellido">
+            <div class="invalid-feedback" *ngIf="formUsuario.get('usApellido')?.hasError('required')">
+              El apellido es obligatorio.
+            </div>
+            <div class="invalid-feedback" *ngIf="formUsuario.get('usApellido')?.hasError('minlength')">
+              El apellido debe tener al menos 3 caracteres.
+            </div>
+          </div>
+
+  
+        <div class="row mt-3">
+          <!-- Correo -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Correo</label>
+            <input type="text" 
+                   class="form-control" 
+                   [ngClass]="{'is-invalid': formUsuario.get('usCorreo')?.invalid && formUsuario.get('usCorreo')?.touched, 'is-valid': formUsuario.get('usCorreo')?.valid}" 
+                   formControlName="usCorreo">
+            <div class="invalid-feedback" *ngIf="formUsuario.get('usCorreo')?.hasError('required')">
+              El correo es obligatorio.
+            </div>
+            <div class="invalid-feedback" *ngIf="formUsuario.get('usCorreo')?.hasError('email')">
+              El correo no tiene un formato válido.
+            </div>
+          </div>
+  
+          <!-- Documento -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Documento</label>
+            <input type="number" 
+                   class="form-control" 
+                   [ngClass]="{'is-invalid': formUsuario.get('usDni')?.invalid && formUsuario.get('usDni')?.touched, 'is-valid': formUsuario.get('usDni')?.valid}" 
+                   formControlName="usDni">
+            <div class="invalid-feedback" *ngIf="formUsuario.get('usDni')?.hasError('required')">
+              El documento es obligatorio.
+            </div>
+            <div class="invalid-feedback" *ngIf="formUsuario.get('usDni')?.hasError('minlength')">
+              El documento debe tener al menos 7 dígitos.
+            </div>
+            <div class="invalid-feedback" *ngIf="formUsuario.get('usDni')?.hasError('maxlength')">
+              El documento no puede tener más de 8 dígitos.
+            </div>
+          </div>
+        </div>
+  
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="alert alert-danger alert-custom" role="alert" *ngIf="formUsuario.invalid && formUsuario.touched">
+              Debes completar todos los campos correctamente.
+            </div>
+          </div>
+        </div>
+  
+        <div class="row mt-3">
+          <div class="col">
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="cargandoGuardado || formUsuario.invalid">
+              <span class="spinner-border spinner-border-sm" aria-hidden="true" *ngIf="cargandoGuardado"></span>
+              Guardar datos
+            </button>
+            <button type="button" class="btn btn-secondary btn-block mt-2" (click)="btnCancelar()">Cancelar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

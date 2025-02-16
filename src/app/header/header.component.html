@@ -1,0 +1,15 @@
+<header class="header">
+  <div class="menu-toggle" id="mobile-menu" (click)="toggleMenu()">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+
+  <nav class="navbar" [ngClass]="{'active': isMenuOpen}">
+    <div class="nav-links2">
+      <a [routerLink]="getInicioLink()" routerLinkActive="active-link">Página Principal</a>
+      <a *ngIf="!isLoggedIn()" routerLink="login" class="btn-login">Iniciar sesión</a>
+      <button *ngIf="isLoggedIn()" (click)="logout()" class="btn-logout">Cerrar sesión</button>
+    </div>
+  </nav>
+</header>

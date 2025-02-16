@@ -1,0 +1,281 @@
+/* Diseño general (Desktop y pantallas grandes) */
+* {
+    margin-top: 80px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1.display-4 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 20px;
+    text-align: center; /* Centrado del título */
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1400px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+    margin-bottom: 50px;
+}
+
+.user-info button + button {
+    margin-left: 10px; /* Espacio horizontal entre botones */
+}
+
+.user-info h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #333;
+}
+
+.user-info form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user-info label {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.user-info input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.user-info button {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #007bff;;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-info button:hover {
+    background-color: #0056b3;
+}
+
+input[readonly] {
+    background-color: #e9ecef; /* Color gris claro que simula deshabilitado */
+    cursor: not-allowed; /* Cambia el cursor a uno que indica que no es editable */
+    border: 1px solid #ccc; /* Bordes como los demás inputs */
+    color: #6c757d; /* Color de texto más oscuro para parecer deshabilitado */
+}
+
+.cards-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaciado uniforme entre tarjetas */
+}
+
+.card {
+    flex: 1 1 calc(33.333% - 20px); /* Ocupa un tercio del contenedor menos el espacio del gap */
+    max-width: calc(33.333% - 20px); /* Asegura que no excedan el tamaño */
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra sutil */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave al interactuar */
+}
+
+.card:hover {
+    transform: translateY(-8px); /* Efecto de elevación */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más prominente */
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #333333;
+    font-weight: bold;
+}
+
+.card p {
+    margin-bottom: 20px;
+    font-size: 1em;
+    color: #555555;
+}
+
+.card button {
+    padding: 12px 24px;
+    background-color: #007bff; /* Azul vibrante */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+}
+
+.mesa-item {
+    display: flex;
+    justify-content: space-between; /* Espacio entre el nombre de la mesa y el botón */
+    align-items: center;
+    padding: 10px 0; /* Espaciado vertical entre los elementos */
+    border-bottom: 1px solid #ccc; /* Línea separadora entre las mesas */
+}
+
+.btn-baja {
+    padding: 8px 12px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-baja:hover {
+    background-color: #ff1a1a;
+}
+
+#edit-form {
+    margin-top: 30px;
+}
+
+#mesas-inscritas {
+    width: 100%; /* Hacer que ocupe todo el ancho del contenedor */
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Añadir un margen superior para separar las mesas inscritas de las tarjetas */
+}
+
+#mesas-inscritas h3 {
+    margin-bottom: 15px;
+    font-size: 1.6em;
+    color: #333;
+}
+
+#mesas-inscritas ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#mesas-inscritas li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #777;
+}
+
+#cerrar-mesas {
+    padding: 10px 15px;
+    background-color: #007bff;; /* Un color llamativo para el botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px; /* Un pequeño margen superior para separar del contenido de mesas */
+    font-size: 16px;
+}
+
+#cerrar-mesas:hover {
+    background-color: #0056b3; /* Un color más oscuro para el hover */
+}
+
+/* Media Queries para dispositivos móviles */
+
+/* Para pantallas de 768px o menos */
+@media (max-width: 768px) {
+    .dashboard-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .user-info h2 {
+        font-size: 1.6em;
+    }
+
+    .cards-section {
+        flex-direction: column; /* Tarjetas en una columna */
+    }
+
+    .card {
+        width: 100%; /* Asegura que las tarjetas ocupen todo el ancho en móviles */
+        margin-bottom: 10px;
+    }
+
+    .card h3 {
+        font-size: 1.4em;
+    }
+
+    .card p {
+        font-size: 1em;
+    }
+
+    .card button {
+        font-size: 15px;
+    }
+
+    #cerrar-mesas {
+        font-size: 15px;
+        padding: 10px 12px;
+    }
+}
+
+/* Para pantallas de 480px o menos */
+@media (max-width: 480px) {
+    .user-info h2 {
+        font-size: 1.4em;
+    }
+
+    .user-info input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .user-info button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .card h3 {
+        font-size: 1.2em;
+    }
+
+    .card p {
+        font-size: 0.95em;
+    }
+
+    .card button {
+        font-size: 14px;
+    }
+
+    #cerrar-mesas {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+}

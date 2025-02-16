@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-center align-items-center mt-3 mb-3">
+  <div class="wrapper">
+    <div class="title-text">
+      <div class="title login" *ngIf="isLoginMode" [class.active]="isLoginMode">Iniciar Sesión</div>
+      <div class="title signup" *ngIf="!isLoginMode" [class.active]="!isLoginMode">Registrarse</div>
+    </div>
+    <div class="form-container">
+      <div class="slide-controls">
+        <button (click)="toggleMode()" [class.active]="isLoginMode" class="slide login text-dark text-bordered">Iniciar Sesión</button>
+        <button (click)="toggleMode()" [class.active]="!isLoginMode" class="slide signup text-dark text-bordered">Registrarse</button>
+        <div class="slider-tab" [ngStyle]="{'left': isLoginMode ? '0%' : '50%'}"></div>
+      </div>
+      <div *ngIf="registroError" class="alert alert-danger" role="alert">
+        {{ registroError }}
+      </div>
+      <div class="form-inner">
+        <form [formGroup]="form" (ngSubmit)="ingresar()">
+          <!-- Campos para el modo de login -->
+          <div *ngIf="isLoginMode">
+            <div class="field">
+              <input type="text" formControlName="documento" placeholder="Documento" required>
+              <small class="alert-danger" *ngIf="submitted && form.get('documento')?.errors?.['required']">
+                El documento es requerido.
+              </small>
+            </div>
+            <div class="field">
+              <input type="password" formControlName="password" placeholder="Contraseña" required>
+            </div>
+            <small class="alert-danger mb-2 mt-2 mr-2" *ngIf="submitted && form.get('password')?.errors?.['required']">La contraseña es requerida.</small>
+            <small class="alert-danger ml-3" *ngIf="loginError && !form.get('password')?.errors?.['required']">{{errorMessage}}</small> <!-- Mensaje de error general -->
+          </div>
+                    
+
+          <!-- Campos para el modo de registro -->
+          <div *ngIf="!isLoginMode">
+            <div class="field group">
+              <input type="text" formControlName="nombre" placeholder="Nombre" required>
+              <input type="text" formControlName="apellido" placeholder="Apellido" required>
+            </div>
+            
+            <div *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched" class="error-message">
+              <small class="alert-danger" *ngIf="form.get('nombre')?.errors?.['required']">El nombre es requerido.</small>
+            </div>
+            <div class="mb--2" *ngIf="form.get('apellido')?.invalid && form.get('apellido')?.touched" class="error-message">
+              <small class="alert-danger" *ngIf="form.get('apellido')?.errors?.['required']">El apellido es requerido.</small>
+            </div>
+            <div class="field">
+              <input type="email" formControlName="correo" placeholder="Correo Electrónico" required>
+              <div *ngIf="form.get('correo')?.invalid && form.get('correo')?.touched" class="error-message">
+                <small class="alert-danger" *ngIf="form.get('correo')?.errors?.['required']">El correo es requerido.</small>
+                <small class="alert-danger" *ngIf="form.get('correo')?.errors?.['email']">Ingrese un correo válido.</small>
+              </div>
+            </div>
+            <div class="field">
+              <input type="text" formControlName="documento" placeholder="Número de Documento" required>
+              <div *ngIf="form.get('documento')?.invalid && form.get('documento')?.touched" class="error-message">
+                <small class="alert-danger" *ngIf="form.get('documento')?.errors?.['required']">El documento es requerido.</small>
+              </div>
+            </div>
+            <div class="field group">
+              <input type="password" formControlName="password" placeholder="Contraseña" required>
+              <input type="password" formControlName="repassword" placeholder="Confirmar Contraseña" required>
+            </div>
+            <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="error-message">
+              <small class="alert-danger" *ngIf="form.get('password')?.errors?.['required']">La contraseña es requerida.</small>
+            </div>
+            <div *ngIf="form.errors?.['mismatch'] && form.get('repassword')?.touched" class="error-message">
+              <small class="alert-danger">Las contraseñas deben coincidir.</small>
+            </div>
+          </div>
+          <!-- <div class="pass-link mt-2" *ngIf="isLoginMode"><a>¿Has olvidado tu contraseña?</a></div> -->
+          <div class="field btn">
+            <div class="btn-layer"></div>
+            <input type="submit" [value]="isLoginMode ? 'Ingresar' : 'Registrarse'">
+          </div>
+          <div class="signup-link" *ngIf="isLoginMode">¿No tienes una cuenta? <a (click)="toggleMode()">Registrarse Ahora</a></div>
+          <div class="signup-link" *ngIf="!isLoginMode">¿Ya tienes una cuenta? <a (click)="toggleMode()">Iniciar Sesión</a></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  

@@ -1,0 +1,43 @@
+<div class="autores-listar-container">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h2 id="autores-grid-label">Lista de Autores</h2>
+  <br>
+  <table id="ex1-grid" role="grid" aria-labelledby="autores-grid-label" class="data">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Nacimiento</th>
+        <th>Biografía</th>
+        <th>Deceso</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let aut of autores">
+        <td>{{ aut.autNombre }}</td>
+        <td>{{ aut.autApellido }}</td>
+        <td>{{ aut.autFecNac }}</td>
+        <td>{{ aut.autBiografia }}</td>
+        <td>{{ aut.autFecDes }}</td>
+        <td>
+          <div class="action-icons">
+            <i class="fas fa-pencil-alt text-primary" (click)="editAutor(aut.idAutor)" title="Editar"></i>
+            <i class="fas fa-trash-alt text-danger" (click)="deleteAutor(aut.idAutor)" title="Eliminar"></i>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="action-footer">
+    <button class="btn btn-success" (click)="navigateToCreate()">
+      <i class="fas fa-plus me-2"></i> Crear Autor
+    </button>
+  </div>
+</div>
+
+  

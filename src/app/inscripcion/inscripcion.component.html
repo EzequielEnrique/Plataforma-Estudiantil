@@ -1,0 +1,98 @@
+<br><br><br><br><br><br>
+<div class="form1">
+
+    <h1 class="text-center my-4 fi title-animation">Formulario de inscripción</h1>
+  
+    <form #formularioForm="ngForm">
+  
+      <div>
+        <label for="turnos">Turnos:</label>
+        <div class="form-floating">
+          <select [disabled]="!deshabilitarCamposForm" class="form-select" id="turno" [(ngModel)]="selectedTurno"
+            name="turno" required>
+            <option *ngFor="let turno of turnos" [value]="turno.idTurnos">
+              {{turno.turNombre}}
+            </option>
+          </select>
+          <label for="turno">Seleccione el turno de la mesa</label>
+        </div>
+      </div>
+  
+      <div>
+        <button class="btn btn-custom2" [disabled]="!deshabilitarCamposForm"
+          (click)="botonMostrarMaterias()">Ir a inscripción...</button>
+      </div>
+  
+      <div [hidden]="!isMateriasVisibles">
+        <label for="correo">Carreras:</label>
+        <div class="form-floating">
+          <select class="form-select" id="carreras" [(ngModel)]="selectedCarrera" name="carreras"
+            (ngModelChange)="cargarMaterias()">
+            <option *ngFor="let carrera of carreras" [value]="carrera.idCarreras">
+              {{ carrera.carNombre }}
+            </option>
+          </select>
+          <label for="carreras">Selecciona una carrera:</label>
+        </div>
+        <label for="unidadesCurriculares">Seleccion de Unidades Curriculares:</label>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>UNIDAD CURRICULAR</th>
+                <th>LLAMADO</th>
+                <th>CONDICION</th>
+                <th>AÑO DE CURSADO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let materia of materias">
+                <td>
+                  <button class="btn ancho100" [ngClass]="{
+                    'btn-danger': !materia.selected,
+                    'btn-success': materia.selected
+                  }" (click)="toggleSeleccion(materia)">
+                    {{ materia.asiNombre }}
+                  </button>
+                </td>
+                <td>
+                  <select class="ancho100" [disabled]="!materia.selected" (change)="actualizarLlamado(materia, $event)">
+                    <option value="">Seleccionar llamado</option>
+                    <option value="1">Primer Llamado</option>
+                    <option value="2">Segundo Llamado</option>
+                   <!--  <option value="3">Coloquios</option> -->
+                  </select>
+                </td>
+                <td>
+                  <select class="ancho100" [disabled]="!materia.selected" (change)="actualizarCondicion(materia, $event)">
+                    <option value="">Seleccionar condicion</option>
+                    <option value="1">Regular</option>
+                    <option value="2">Libre</option>
+                    <option value="3">Promocional</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="ancho100" [disabled]="!materia.selected"
+                    (change)="actualizarAnoCursado(materia, $event)">
+                    <option value="">Seleccionar año</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="OTRO">OTRO</option>
+                  </select>
+  
+  
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
+        <div>
+          <button class="btn btn-custom2" (click)="guardarInformacion()">Enviar Inscripción</button>
+        </div>
+      </div>
+    </form>
+  

@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: -webkit-linear-gradient(left, #003366, #004080, #0059b3, #0073e6);
+}
+
+.d-flex {
+  height: 100vh; /* Altura de la ventana visible */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Evitar desbordamiento del contenedor */
+  padding: 10px; /* Espaciado para evitar que el contenido toque los bordes */
+}
+
+::selection {
+  background: #1a75ff;
+  color: #fff;
+}
+
+.wrapper {
+  overflow: hidden;
+  max-width: 390px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+}
+
+.alert {
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.wrapper .title-text {
+  display: flex;
+  width: 200%;
+  transition: transform 0.6s ease; /* Añadir transición */
+}
+
+.wrapper .title {
+  width: 50%;
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  transition: color 0.6s ease; /* Añadir transición de color */
+}
+
+.wrapper .title.signup {
+  margin-top: 80px; /* Mueve el título hacia abajo */
+  position: relative;
+  top: 10px;
+}
+
+
+.wrapper .slide-controls {
+  position: relative;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px 0 10px 0;
+  justify-content: space-between;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 15px;
+}
+
+.slide-controls .slide {
+  flex: 1; /* Hacer que cada botón ocupe el 50% del ancho */
+  height: 100%;
+  color: #000000; /* Cambia el color del texto */
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 48px; /* Centrar verticalmente el texto */
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.6s ease;
+  background: transparent; /* Fondo transparente para los botones */
+  border: none; /* Sin borde */
+}
+
+.slide-controls label.signup {
+  color: #000;
+}
+
+.slide-controls .slider-tab {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0; /* Comienza en la posición 0 para el modo de inicio de sesión */
+  z-index: 0;
+  border-radius: 15px;
+  background: -webkit-linear-gradient(left, #003366, #004080, #0059b3, #0073e6);
+  transition: left 0.6s ease; /* Transición suave al mover el slider */
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+#signup:checked ~ .slider-tab {
+  left: 50%;
+}
+.slide-controls label.signup {
+  color: #000;
+}
+
+.slide-controls label.login {
+  color: #000; /* Asegúrate de que el color inicial sea negro */
+}
+.text-bordered {
+  color: #000; 
+  text-shadow: 
+    -0.8px -0.8px 0 #fff,  
+     0.8px -0.8px 0 #fff,
+    -0.8px  0.8px 0 #fff,
+     0.8px  0.8px 0 #fff; 
+}
+
+
+#signup:checked ~ label.signup {
+  color: #1a75ff; /* Color del texto de registro cuando está activo */
+}
+
+#signup:checked ~ label.login {
+  color: #000; /* Color del texto de iniciar sesión cuando está en registro */
+}
+
+#login:checked ~ label.signup {
+  color: #000; /* Color del texto de registro cuando está en iniciar sesión */
+}
+
+#login:checked ~ label.login {
+  color: #1a75ff; /* Color del texto de iniciar sesión cuando está activo */
+}
+
+.wrapper .form-container {
+  width: 100%;
+  align-content: center;
+  overflow: hidden;
+}
+
+.form-container .form-inner {
+  display: flex;
+  width: 200%;
+}
+
+.form-container .form-inner form {
+  width: 50%;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-inner form .field {
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form-inner form .field input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 15px;
+  border-radius: 15px;
+  border: 1px solid lightgrey;
+  border-bottom-width: 2px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+}
+
+.form-inner form .field input:focus {
+  border-color: #1a75ff;
+}
+
+.form-inner form .field input::placeholder {
+  color: #999;
+  transition: all 0.3s ease;
+}
+
+form .field input:focus::placeholder {
+  color: #1a75ff;
+}
+
+.form-inner form .pass-link {
+  margin-top: 5px;
+}
+
+.form-inner form .signup-link {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.form-inner form .pass-link a,
+.form-inner form .signup-link a {
+  color: #1a75ff;
+  text-decoration: none;
+}
+
+.form-inner form .pass-link a:hover,
+.form-inner form .signup-link a:hover {
+  text-decoration: underline;
+}
+
+form .btn {
+  height: 50px;
+  width: 100%;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+form .btn .btn-layer {
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: -webkit-linear-gradient(right, #003366, #004080, #0059b3, #0073e6);
+  border-radius: 15px;
+  transition: all 0.4s ease;
+}
+
+form .btn:hover .btn-layer {
+  left: 0;
+}
+
+form .btn input[type="submit"] {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  background: none;
+  border: none;
+  color: #fff;
+  padding-left: 0;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.text-black {
+  color: #000 !important;
+}
+
+/* CSS existente... */
+
+.field.group {
+  display: flex;
+  flex-wrap: wrap; /* Permitir que los elementos se ajusten */
+}
+
+.field.group input {
+  flex: 1; /* Hacer que los inputs se expandan igualmente */
+  margin-right: 10px; /* Espacio entre inputs */
+}
+
+/* Eliminar margen derecho del último input en el grupo */
+.field.group input:last-child {
+  margin-right: 0;
+}
+
+/* Responsive: en pantallas pequeñas, cambiar a vertical */
+@media (max-width: 768px) {
+  /* .field.group {
+    flex-direction: column; /* Cambiar a columna en pantallas pequeñas 
+  } */
+
+  .field.group input {
+    margin-right: 0; /* Quitar margen derecho */
+    margin-bottom: 10px; /* Espacio inferior entre inputs */
+  }
+}.text-black {
+  color: #000 !important; /* Color negro */
+}
+
+.text-blue {
+  color: #1a75ff !important; /* Color azul */
+}
+
+.title {
+  transition: color 0.3s ease; /* Transición suave al cambiar de color */
+}
+

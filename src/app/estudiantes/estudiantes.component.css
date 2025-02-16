@@ -1,0 +1,94 @@
+/* Contenedor principal */
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 900px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+table th,
+table td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background-color: #dff0d8;
+    cursor: pointer;
+}
+
+/* Botón */
+button.btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Elementos flotantes y entradas (comentados en el HTML) */
+input.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    table th, table td {
+        font-size: 0.9rem;
+    }
+
+    button.btn {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+}
