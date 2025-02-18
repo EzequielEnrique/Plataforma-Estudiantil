@@ -22,23 +22,23 @@ export class InscripcionComponent implements OnInit {
   };
 
   mensajeInscripcion: string = '';
-  //isDniOK: boolean = true;
+  
   isMateriasVisibles: boolean = false;
 
-  //formularioHabilitado = false;
+  
   claseBoton = 'btn-custom';
   dni: string = '';
   deshabilitarDNI: boolean = false;
 
   todosCamposCompletos() {
-    // Verifica si todos los campos obligatorios están llenos
+    
     return (
       this.formulario.turno
     );
   }
 
 
-  // Variables para almacenar los valores seleccionados
+  
   llamadoSeleccionado: any = null;
   condicionSeleccionada: any = null
   anoCursadoSeleccionado: any = null;
@@ -52,7 +52,7 @@ export class InscripcionComponent implements OnInit {
   idEstudianteAct: any;
   inscripciones: any[] = [];
   materiasSeleccionadas: any[] = [];
-  materiasTemporales: any[] = []; // Agrega este arreglo temporal
+  materiasTemporales: any[] = []; 
 
   constructor(private estudiantesService: EstudiantesService,
     private carrerasServices: CarrerasService,
@@ -74,17 +74,17 @@ export class InscripcionComponent implements OnInit {
     }
     this.cargarCarreras();
     this.cargarTurnosActivos();
-    //Obtengo las incripciones desde el servicio
+    
     this.inscripciones = this.dataService.getInscripciones();
 
     if (this.dataService.getCargado() == false) {
       this.router.navigate(['/dashboard-estudiante']);
     }
 
-    // Obtener los valores iniciales desde el HTML al inicializar la página
+    
 
   }
-  //Cargo los turnos activos dentro del Select
+  
   cargarTurnosActivos() {
     this.inscripcionServices.getTurnosActivos().subscribe(
       (res) => { this.turnos = res; }
@@ -109,21 +109,20 @@ export class InscripcionComponent implements OnInit {
 
   botonMostrarMaterias() {
     if (this.selectedTurno == null) {
-      this._snackBar.open('¡Por favor seleccione un Turno!', 'Cerrar', { duration: 5000 }); // Mensaje emergente
+      this._snackBar.open('¡Por favor seleccione un Turno!', 'Cerrar', { duration: 5000 }); 
     } else {
       if (this.inscripciones && Array.isArray(this.inscripciones)) {
-        //Validar si está inscripto a ese llamado (TURNO)
+        
         const buscarIncripcion = this.inscripciones.filter(ins => ins.idTurnos == this.selectedTurno);
 
         if (buscarIncripcion.length == 0) {
           this.isMateriasVisibles = true;
           this.deshabilitarCamposForm = false;
         } else {
-          this._snackBar.open('¡Ya se encuentra inscripto en este llamado!', 'Cerrar', { duration: 5000 }); // Mensaje emergente
+          this._snackBar.open('¡Ya se encuentra inscripto en este llamado!', 'Cerrar', { duration: 5000 }); 
         }
       } else {
-        // Manejo del caso en que this.inscripciones no está definido o no es un array
-        //Es decir cuando no tengo inscripciones realizadas
+        
         this.isMateriasVisibles = true;
         this.deshabilitarCamposForm = false;
       }
@@ -138,7 +137,7 @@ export class InscripcionComponent implements OnInit {
     if (index !== -1) {
       this.materiasTemporales[index].llamadoID = event.target.value;
     }
-    this.llamadoSeleccionado = event.target.value; // Actualizar el valor seleccionado
+    this.llamadoSeleccionado = event.target.value; 
 
   }
 
@@ -147,7 +146,7 @@ export class InscripcionComponent implements OnInit {
     if (index !== -1) {
       this.materiasTemporales[index].condicionID = event.target.value;
     }
-    this.condicionSeleccionada = event.target.value; // Actualizar el valor seleccionado
+    this.condicionSeleccionada = event.target.value; 
 
   }
 
@@ -156,8 +155,8 @@ export class InscripcionComponent implements OnInit {
     if (index !== -1) {
       this.materiasTemporales[index].InsAnioCursado = event.target.value;
     }
-    this.anoCursadoSeleccionado = event.target.value; // Actualizar el valor seleccionado
-    //this.carrerasServices
+    this.anoCursadoSeleccionado = event.target.value; 
+    
   }
 
 
@@ -179,11 +178,11 @@ export class InscripcionComponent implements OnInit {
   }
 
   guardarInformacion() {
-    //Guardo el Token del Local Storage
+    
     const token = localStorage.getItem('Token');
 
     console.log(this.materiasTemporales);
-    //Verifico que todos los campos estén completos
+    
     const todoCompleto: boolean = this.materiasTemporales.every(materia =>
       materia.llamadoID &&
       materia.condicionID &&
@@ -191,17 +190,16 @@ export class InscripcionComponent implements OnInit {
 
     if (todoCompleto === true && this.materiasTemporales.length > 0) {
 
-      // Actualizar materiasSeleccionadas usando el contenido de materiasTemporales
+      
       this.materiasSeleccionadas = this.materiasTemporales.slice();
-      // Utilizar las materias del arreglo temporal en lugar de this.materiasSeleccionadas
-      //const estudiantesIDArray = this.materiasTemporales.map(item => item.estudiantesID);
+      
       const asignaturaIDArray = this.materiasTemporales.map(item => item.idAsignatura);
       const llamadoIDArray = this.materiasTemporales.map(item => item.llamadoID);
       const condicionIDArray = this.materiasTemporales.map(item => item.condicionID);
       const insAnioCursadoArray = this.materiasTemporales.map(item => item.InsAnioCursado);
 
       const postData = {
-        //estudiantesID: estudiantesIDArray,
+        
         asignaturaID: asignaturaIDArray,
         llamadoID: llamadoIDArray,
         condicionID: condicionIDArray,
@@ -210,24 +208,23 @@ export class InscripcionComponent implements OnInit {
         Authorization: token
       };
 
-      //console.log(postData);
+      
 
       this.inscripcionServices.crearInscripcion(postData)
         .subscribe(
           (respuesta) => {
-            //console.log('Inscripciones creadas con éxito:', respuesta);
-            // Realizar acciones adicionales si es necesario
+            
             this._snackBar.open('Inscripciones realizadas correctamente', 'Cerrar', { duration: 5000 }); // Mensaje emergente
           },
           (error) => {
             console.error('Error al crear las inscripciones:', error);
-            // Manejar el error adecuadamente
+            
           }
         );
 
       this.router.navigate(['/dashboard-estudiante']);
     } else {
-      this._snackBar.open('¡Debes completar todos los campos!', 'Cerrar', { duration: 5000 }); // Mensaje emergente
+      this._snackBar.open('¡Debes completar todos los campos!', 'Cerrar', { duration: 5000 }); 
     }
 
 

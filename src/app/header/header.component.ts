@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit() {
-    // Limpia el localStorage si no está autenticado
+    
     if (!this.loginService.isAuthenticate()) {
       localStorage.removeItem('Token');
       localStorage.removeItem('Rol');

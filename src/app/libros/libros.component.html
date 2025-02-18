@@ -1,12 +1,12 @@
 <div class="container text-center">
   <h1 class="display-4 mb-4">Gestión de Libros</h1>
 
-  <!-- Botón para abrir el formulario de creación -->
+  
   <div class="mb-3 text-center">
     <button class="btn btn-success" (click)="mostrarFormulario()">Ingresar Nuevo Libro</button>
   </div>
 
-  <!-- Formulario para crear o editar libro -->
+ 
   <div *ngIf="showForm" class="form-container mb-4 mx-auto" style="max-width: 500px;">
     <h3 *ngIf="!editMode">Crear Nuevo Libro</h3>
     <h3 *ngIf="editMode">Editar Libro</h3>
@@ -42,7 +42,7 @@
     </div>
   </div>
 
-  <!-- Buscador -->
+ 
   <div class="search-container mb-4">
     <input
       type="text"
@@ -54,7 +54,7 @@
     <button class="btn btn-secondary ml-2" (click)="limpiarBusqueda()">Limpiar</button>
   </div>
 
-  <!-- Tabla de libros -->
+ 
   <table class="table table-hover">
     <thead class="thead-light">
       <tr>
@@ -79,7 +79,7 @@
     </tbody>
   </table>
 
-  <!-- Paginación -->
+ 
   <div class="d-flex justify-content-center align-items-center mt-2">
     <button class="btn btn-secondary" (click)="cambiarPagina(1)"><<</button>
 

@@ -35,7 +35,7 @@ export class EditarDatosEstudianteComponent {
       this.router.navigate(['dashboard-estudiante']);
     }
 
-    //Completo el Formulario
+    
     this.formUsuario.setValue({
       usApellido: this.usService.getUsuarioData().perApellido,
       usNombre: this.usService.getUsuarioData().perNombre,
@@ -48,7 +48,7 @@ export class EditarDatosEstudianteComponent {
 
   btnCancelar(){
     this.usService.deleteUsuarioData();
-    this.location.back(); // Regresa a la página anterior
+    this.location.back(); 
   }
 
   onSubmit() {
@@ -69,7 +69,7 @@ export class EditarDatosEstudianteComponent {
           this.cargandoGuardado = false;
           this._snackBar.open('Datos actualizados correctamente', 'Cerrar', { duration: 5000 });
   
-          // Resetear formulario tras guardar
+          
           this.formUsuario.reset();
           this.formUsuario.setValue({
             usApellido: this.usService.getUsuarioData().perApellido,
@@ -87,8 +87,8 @@ export class EditarDatosEstudianteComponent {
         }
       );
     } else {
-      // Si el formulario no es válido
-      this.formUsuario.markAllAsTouched(); // Forzar mostrar errores
+      
+      this.formUsuario.markAllAsTouched(); 
       this._snackBar.open('Por favor, corrige los errores antes de guardar.', 'Cerrar', { duration: 5000 });
     }
   }

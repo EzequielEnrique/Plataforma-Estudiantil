@@ -1,6 +1,6 @@
 <br><br><br><br><br><br>
 <div>
-  <!-- Botón para crear un nuevo préstamo (solo visible si no eres estudiante) -->
+
   <button *ngIf="!isStudent" (click)="abrirModal()">Nuevo Préstamo</button>
 
   <table>
@@ -33,7 +33,7 @@
     </tbody>
   </table>
 
-  <!-- Modal -->
+
   <div class="modal" tabindex="-1" *ngIf="modalVisible" id="prestamoModal">
     <div class="modal-dialog">
       <div class="modal-content">

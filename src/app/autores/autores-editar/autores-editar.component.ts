@@ -29,20 +29,20 @@ export class AutoresEditarComponent implements OnInit {
 
   ngOnInit(): void {
     this.elID = this.rutaactiva.snapshot.paramMap.get('id');
-    console.log('ID del autor a editar:', this.elID); // Verifica el ID recibido
+    console.log('ID del autor a editar:', this.elID); 
   
     this.autoresService.getAutorById(this.elID).subscribe((respuesta) => {
-      console.log('Respuesta del servicio:', respuesta); // Verifica la respuesta del servicio
-      if (respuesta && respuesta.length > 0) { // Verifica que haya elementos en el array
-        const autor = respuesta[0]; // Accede al primer elemento del array
+      console.log('Respuesta del servicio:', respuesta); 
+      if (respuesta && respuesta.length > 0) { 
+        const autor = respuesta[0]; 
         this.formAutor.patchValue({
           autNombre: autor.autNombre,
           autApellido: autor.autApellido,
           autFecNac: autor.autFecNac,
-          autBio: autor.autBiografia, // Asegúrate de que esto coincida
+          autBio: autor.autBiografia, 
           autFecDes: autor.autFecDes
         });
-        console.log('Formulario actualizado con los datos del autor:', this.formAutor.value); // Verifica los valores del formulario
+        console.log('Formulario actualizado con los datos del autor:', this.formAutor.value); 
       }
     });
   }
@@ -58,21 +58,21 @@ export class AutoresEditarComponent implements OnInit {
       autFecDes: this.formAutor.get('autFecDes')?.value
     };
 
-    console.log('Datos del autor a actualizar:', autorActualizado); // Verifica los datos que se van a enviar
+    console.log('Datos del autor a actualizar:', autorActualizado); 
 
     this.autoresService.editAutor(autorActualizado).subscribe({
       next: () => {
-        console.log('Autor actualizado exitosamente'); // Confirma que la actualización fue exitosa
+        console.log('Autor actualizado exitosamente'); 
         this.router.navigate(['autores-listar']);
       },
       error: (err) => {
-        console.error('Error al editar el autor:', err); // Muestra el error en caso de que ocurra
+        console.error('Error al editar el autor:', err); 
       }
     });
   }
 
   Cancelar(): void {
-    console.log('Cancelando la edición del autor'); // Confirma que se está cancelando
+    console.log('Cancelando la edición del autor'); 
     this.router.navigateByUrl('autores-listar');
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrestamoService } from '../prestamo.service';
-import { AuthService } from '../auth.service'; // Servicio de autenticación
+import { AuthService } from '../auth.service'; 
 
 @Component({
   selector: 'app-prestamos',
@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service'; // Servicio de autenticación
 })
 export class PrestamosComponent implements OnInit {
   prestamos: any[] = [];
-  isStudent: boolean = false; // Variable para verificar si es estudiante
+  isStudent: boolean = false; 
   prestamoSeleccionado: any = {
     nombre: '',
     apellido: '',
@@ -24,13 +24,13 @@ export class PrestamosComponent implements OnInit {
   constructor(private prestamoService: PrestamoService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.cargarPrestamos(); // Cargar los préstamos desde el backend
-    this.verificarRol(); // Verificar el rol del usuario
+    this.cargarPrestamos(); 
+    this.verificarRol(); 
   }
 
   verificarRol(): void {
     const rol = localStorage.getItem('Rol');
-    this.isStudent = rol === 'Estudiante'; // Si el rol es Estudiante, deshabilitamos acciones
+    this.isStudent = rol === 'Estudiante'; 
   }
 
   cargarPrestamos(): void {
@@ -40,7 +40,7 @@ export class PrestamosComponent implements OnInit {
   }
 
   abrirModal(prestamo: any = null): void {
-    if (this.isStudent) return; // Evitar que estudiantes abran el modal
+    if (this.isStudent) return; 
     this.modalVisible = true;
     this.editando = !!prestamo;
 
@@ -63,7 +63,7 @@ export class PrestamosComponent implements OnInit {
   }
 
   guardarPrestamo(): void {
-    if (this.isStudent) return; // Evitar que estudiantes guarden préstamos
+    if (this.isStudent) return; 
     if (this.editando) {
       this.prestamoService
         .updatePrestamo(this.prestamoSeleccionado.id, this.prestamoSeleccionado)
@@ -80,14 +80,14 @@ export class PrestamosComponent implements OnInit {
   }
 
   eliminarPrestamo(id: number): void {
-    if (this.isStudent) return; // Evitar que estudiantes eliminen préstamos
+    if (this.isStudent) return; 
     this.prestamoService.deletePrestamo(id).subscribe(() => {
       this.cargarPrestamos();
     });
   }
 
   editarPrestamo(prestamo: any): void {
-    if (this.isStudent) return; // Evitar que estudiantes eliminen préstamos
+    if (this.isStudent) return; 
     this.abrirModal(prestamo);
   }
 }

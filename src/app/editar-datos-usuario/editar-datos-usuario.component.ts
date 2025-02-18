@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ServiciosUsuariosService } from '../servicios-usuarios.service';
-import { Location } from '@angular/common'; // Asegúrate de que esté importado
+import { Location } from '@angular/common'; 
 
 @Component({
   selector: 'app-editar-datos-usuario',
@@ -35,7 +35,7 @@ export class EditarDatosUsuarioComponent {
       this.router.navigate(['dashboard-bibliotecario']);
     }
 
-    //Completo el Formulario
+    
     this.formUsuario.setValue({
       usApellido: this.usService.getUsuarioData().perApellido,
       usNombre: this.usService.getUsuarioData().perNombre,
@@ -48,7 +48,7 @@ export class EditarDatosUsuarioComponent {
 
   btnCancelar(){
     this.usService.deleteUsuarioData();
-    this.location.back(); // Regresa a la página anterior
+    this.location.back(); 
   }
 
   onSubmit() {
@@ -87,8 +87,8 @@ export class EditarDatosUsuarioComponent {
         }
       );
     } else {
-      // Si el formulario no es válido
-      this.formUsuario.markAllAsTouched(); // Forzar mostrar errores
+      
+      this.formUsuario.markAllAsTouched(); 
       this._snackBar.open('Por favor, corrige los errores antes de guardar.', 'Cerrar', { duration: 5000 });
     }
   }

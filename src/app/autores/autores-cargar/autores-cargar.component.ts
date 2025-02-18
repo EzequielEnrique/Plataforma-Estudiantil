@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class AutoresCargarComponent implements OnInit {
   
-  // El modelo de autor que será llenado desde el formulario
+  
   autor: Autor = {
     autNombre: '',
     autApellido: '',
@@ -27,11 +27,11 @@ export class AutoresCargarComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    // Llamamos al servicio para agregar un nuevo autor
+    
     this.autorservice.addAutor(this.autor).subscribe(
       (data) => {
         console.log('Autor creado con éxito', data);
-        // Después de crear el autor, puedes redirigir a otra página, por ejemplo, la lista de autores
+        
         this.router.navigateByUrl('autores-listar');
       },
       (error) => {
@@ -41,7 +41,7 @@ export class AutoresCargarComponent implements OnInit {
   }
 
   Cancelar(): void {
-    console.log('Cancelando la edición del autor'); // Confirma que se está cancelando
+    console.log('Cancelando la edición del autor'); 
     this.router.navigateByUrl('autores-listar');
   }
 }

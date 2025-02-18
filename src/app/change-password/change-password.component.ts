@@ -32,23 +32,23 @@ export class ChangePasswordComponent {
 
     const usuarioId = this.usService.getUsuarioData().perId;
 
-    // Llamar al servicio para actualizar la contraseña
+    
     this.usService.cambiarContrasena(usuarioId, this.nuevaContrasena).subscribe(
       () => {
         this.snackBar.open('Contraseña actualizada exitosamente', 'Cerrar', {
           duration: 3000,
         });
   
-        // Obtener el rol del usuario
+        
         const rol = localStorage.getItem('Rol'); 
   
-        // Redirigir al dashboard correspondiente según el rol
+        
         if (rol === 'Estudiante') {
           this.router.navigate(['/dashboard-estudiante']);
         } else if (rol === 'Bibliotecario') {
           this.router.navigate(['/dashboard-bibliotecario']);
         } else {
-          this.router.navigate(['/']); // Redirigir al inicio si el rol no es válido
+          this.router.navigate(['/']); 
         }
       },
       (error) => {
@@ -61,7 +61,7 @@ export class ChangePasswordComponent {
   }
 
   cancelar() {
-    this.location.back(); // Regresa a la página anterior
+    this.location.back(); 
   }
 }
 

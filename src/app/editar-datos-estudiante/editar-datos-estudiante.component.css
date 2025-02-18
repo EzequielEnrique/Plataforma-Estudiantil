@@ -1,4 +1,4 @@
-/* Diseño general */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
@@ -10,13 +10,13 @@ body {
     padding: 30px;
   }
   
-  /* Estilo para el título */
+  
   .h4 {
     font-size: 1.75rem;
     font-weight: 600;
   }
   
-  /* Estilo para los campos de formulario */
+  
   .form-label {
     font-size: 1rem;
     font-weight: 500;
@@ -45,7 +45,7 @@ body {
     border-color: #dc3545;
   }
   
-  /* Alertas */
+  
   .alert-custom {
     background-color: #f8d7da;
     color: #721c24;
@@ -58,7 +58,7 @@ body {
     margin-top: 10px;
   }
   
-  /* Estilo para los botones */
+  
   .btn {
     font-size: 1rem;
     padding: 10px 15px;
@@ -93,7 +93,7 @@ body {
     vertical-align: middle;
   }
   
-  /* Márgenes y espaciado */
+  
   .row.mt-4 {
     margin-top: 2rem;
   }
