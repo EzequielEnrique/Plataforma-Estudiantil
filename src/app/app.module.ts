@@ -24,8 +24,6 @@ import { PrestamosComponent } from './prestamos/prestamos.component';
 import { AutoresCargarComponent } from './autores/autores-cargar/autores-cargar.component';
 import { AutoresEditarComponent } from './autores/autores-editar/autores-editar.component';
 import { AutoresListarComponent } from './autores/autores-listar/autores-listar.component';
-
-// Angular Material
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
