@@ -1,16 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { ParsedVariable } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface Autor {
-  idAutor?: number; // Asegúrate de que el nombre coincida con el de tu base de datos
+  idAutor?: number;
   autNombre: string;
   autApellido: string;
   autFecNac: string;
   autBiografia: string;
   autFecDes: string;
-  
 }
 
 @Injectable({
@@ -18,26 +16,31 @@ export interface Autor {
 })
 export class AutoresService {
   private apiUrl = 'http://localhost/Final/API/autores.php';
- 
+
   constructor(private http: HttpClient) { }
 
+  private getAuthParam(): string {
+    return `Authorization=${localStorage.getItem('Token')}`;
+  }
+
   getAutor(): Observable<Autor[]> {
-    return this.http.get<Autor[]>(this.apiUrl);
+    return this.http.get<Autor[]>(`${this.apiUrl}?${this.getAuthParam()}`);
   }
 
   getAutorById(id: number): Observable<Autor[]> {
-    return this.http.get<Autor[]>(`${this.apiUrl}?idAutor=${id}`);
-  }  
-  
-  addAutor(Autor: Autor): Observable<number> {
-    return this.http.post<number>(this.apiUrl, Autor);
+    return this.http.get<Autor[]>(`${this.apiUrl}?idAutor=${id}&${this.getAuthParam()}`);
   }
 
-  editAutor(Autor: Autor): Observable<any> {
-    return this.http.put<any>(this.apiUrl, Autor);
-}
+  addAutor(autor: Autor): Observable<number> {
+    return this.http.post<number>(`${this.apiUrl}?${this.getAuthParam()}`, autor);
+  }
+
+  editAutor(autor: Autor): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}?${this.getAuthParam()}`, autor);
+  }
 
   delAutor(idAutor: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}?idAutor=${idAutor}`);
+    return this.http.delete<any>(`${this.apiUrl}?idAutor=${idAutor}&${this.getAuthParam()}`);
   }
 }
+
