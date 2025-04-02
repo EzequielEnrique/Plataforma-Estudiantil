@@ -113,11 +113,24 @@ export class LibrosComponent implements OnInit {
   }
 
   actualizarLibro(): void {
-    this.librosService.updateLibro(this.currentLibro).subscribe(() => {
-      this.obtenerLibros();
-      this.cancelar();
-    });
+    const token = localStorage.getItem('Token') || ''; // Asegura que no sea null
+    if (!token) {
+      console.error("Token no encontrado en localStorage");
+      return;
+    }
+  
+    this.librosService.updateLibro(this.currentLibro, token).subscribe(
+      () => {
+        this.obtenerLibros();
+        this.cancelar();
+      },
+      error => {
+        console.error("Error en la actualización:", error);
+      }
+    );
   }
+  
+  
 
   eliminarLibro(id: number): void {
     this.librosService.deleteLibro(id).subscribe(() => {

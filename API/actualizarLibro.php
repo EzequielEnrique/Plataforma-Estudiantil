@@ -6,8 +6,10 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 require_once 'conexionDB.php';
+require_once 'auth.php';
 
 $pdo = new Conexion();
+$auth = new Authentication($_ENV['SECRET_KEY']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     // Manejar preflight request
@@ -16,6 +18,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    // Obtener el token desde la URL
+    if (!isset($_GET['Token']) || empty($_GET['Token'])) {
+        header("HTTP/1.1 401 Unauthorized");
+        echo json_encode(["error" => "Token no proporcionado"]);
+        exit;
+    }
+
+    $decodedToken = $auth->authenticateToken($_GET['Token']);
+    if (!$decodedToken) {
+        header("HTTP/1.1 401 Unauthorized");
+        echo json_encode(["error" => "Token inválido"]);
+        exit;
+    }
+
     // Obtener los datos enviados en el cuerpo de la petición
     $input = json_decode(file_get_contents("php://input"), true);
 
@@ -74,5 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 header("HTTP/1.1 405 Method Not Allowed");
 echo json_encode(["error" => "Método HTTP no permitido"]);
 exit;
-?>
+
+
 

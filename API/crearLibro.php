@@ -1,15 +1,38 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: GET,POST,OPTIONS");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
 
 require_once 'conexionDB.php';
+require_once 'auth.php';
 
-$data = json_decode(file_get_contents('php://input'), true);
 $conexion = new Conexion();
+$auth = new Authentication($_ENV['SECRET_KEY']); // Usa la clave secreta de auth.php
+
+// Obtener los datos enviados en el cuerpo de la petición
+$data = json_decode(file_get_contents('php://input'), true);
+
+// Verificar si el Token está presente
+if (!isset($data['Token']) || empty($data['Token'])) {
+    echo json_encode(['error' => 'Token no proporcionado']);
+    http_response_code(401);
+    exit;
+}
+
+// Autenticar el Token
+$token = $data['Token'];
+$decoded = $auth->authenticateToken($token);
+
+if (!$decoded) {
+    echo json_encode(['error' => 'Token inválido o expirado']);
+    http_response_code(401);
+    exit;
+}
 
 try {
     $query = "INSERT INTO librosdebase (nombre, fecha_publicacion, autor, genero, sinopsis) 
@@ -21,8 +44,11 @@ try {
     $stmt->bindParam(':genero', $data['genero']);
     $stmt->bindParam(':sinopsis', $data['sinopsis']);
     $stmt->execute();
+    
     echo json_encode(['id' => $conexion->lastInsertId()]);
 } catch (PDOException $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }
 ?>
+
+

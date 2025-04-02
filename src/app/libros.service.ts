@@ -14,14 +14,21 @@ export class LibrosService {
     return this.http.get<any[]>(`${this.apiUrl}/obtenerLibros.php?Token=${token}`);
   }
   
-  
 
   createLibro(libro: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/crearLibro.php`, libro);
+    const token = localStorage.getItem('Token'); // Obtener el Token almacenado
+    if (!token) {
+      console.error('Token no encontrado');
+      return new Observable(); // Devolver un Observable vacío si no hay Token
+    }
+  
+    const body = { ...libro, Token: token }; // Agregar el Token al cuerpo de la petición
+    return this.http.post<any>(`${this.apiUrl}/crearLibro.php`, body);
   }
+  
 
-  updateLibro(libro: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/actualizarLibro.php`, libro);
+  updateLibro(libro: any, token: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/actualizarLibro.php?Token=${token}`, libro);
   }
 
   deleteLibro(id: number): Observable<any> {
