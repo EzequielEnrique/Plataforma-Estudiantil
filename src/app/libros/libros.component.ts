@@ -28,12 +28,24 @@ export class LibrosComponent implements OnInit {
   }
 
   obtenerLibros(): void {
-    this.librosService.getLibros().subscribe((data: any[]) => {
-      this.libros = data;
-      this.librosFiltrados = data;
-      this.actualizarPaginacion();
+    const token = localStorage.getItem('Token'); // Con 'T' mayúscula
+    if (!token) {
+      console.error('Token no encontrado');
+      return;
+    }
+  
+    this.librosService.getLibros(token).subscribe({
+      next: (data: any[]) => {
+        this.libros = data;
+        this.librosFiltrados = data;
+        this.actualizarPaginacion();
+      },
+      error: (err) => {
+        console.error('Error obteniendo libros:', err);
+      }
     });
   }
+  
 
   buscarLibro(): void {
     if (this.terminoBusqueda.trim()) {
