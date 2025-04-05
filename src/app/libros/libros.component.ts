@@ -133,9 +133,26 @@ export class LibrosComponent implements OnInit {
   
 
   eliminarLibro(id: number): void {
-    this.librosService.deleteLibro(id).subscribe(() => {
-      this.obtenerLibros();
-    });
+    const token = localStorage.getItem('Token');
+  
+    if (!token) {
+      console.error('No se encontró un Token, por favor inicia sesión');
+      return;
+    }
+  
+    this.librosService.deleteLibro(id, token).subscribe(
+      response => {
+        console.log('Libro eliminado:', response);
+        this.obtenerLibros();
+      },
+      error => {
+        console.error('Error eliminando el libro:', error);
+        if (error.status === 403) {
+          alert('No tienes permisos para eliminar libros o tu sesión expiró.');
+        }
+      }
+    );
   }
-}
+  
+}  
 

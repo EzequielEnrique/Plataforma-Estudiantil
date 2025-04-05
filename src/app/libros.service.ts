@@ -31,8 +31,10 @@ export class LibrosService {
     return this.http.put<any>(`${this.apiUrl}/actualizarLibro.php?Token=${token}`, libro);
   }
 
-  deleteLibro(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/eliminarLibro.php?id=${id}`);
+  deleteLibro(id: number, token: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/eliminarLibro.php?id=${id}&Token=${token}`);
   }
+  
+  
 }
 
