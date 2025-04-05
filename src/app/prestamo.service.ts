@@ -11,20 +11,27 @@ export class PrestamoService {
   constructor(private http: HttpClient) {}
 
   getPrestamos(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/obtenerPrestamos.php`);
+    const token = localStorage.getItem('Token');
+    return this.http.get(`${this.baseUrl}/obtenerPrestamos.php?Token=${token}`);
   }
+  
 
   createPrestamo(prestamo: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/crearPrestamo.php`, prestamo);
+    const token = localStorage.getItem('Token');
+    return this.http.post(`${this.baseUrl}/crearPrestamo.php?Token=${token}`, prestamo);
   }
+  
 
   updatePrestamo(id: number, prestamo: any): Observable<any> {
+    const token = localStorage.getItem('Token');
     const updatedPrestamo = { id, ...prestamo };
-    return this.http.post(`${this.baseUrl}/actualizarPrestamo.php`, updatedPrestamo);
+    return this.http.post(`${this.baseUrl}/actualizarPrestamo.php?Token=${token}`, updatedPrestamo);
   }
+  
 
   deletePrestamo(id: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/eliminarPrestamo.php`, { id });
+    const token = localStorage.getItem('Token');
+    return this.http.post(`${this.baseUrl}/eliminarPrestamo.php?Token=${token}`, { id });
   }
 }
 

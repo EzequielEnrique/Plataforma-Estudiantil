@@ -1,11 +1,21 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: PUT, OPTIONS");
+header("Access-Control-Allow-Methods: POST, PUT, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 require_once 'conexionDB.php';
+require_once 'auth.php'; // Usamos tu archivo actual
+
+// Obtenemos y validamos el token desde GET
+$token = $_GET['Token'] ?? null;
+
+if (!$token || !$auth->authenticateToken($token)) {
+    http_response_code(403);
+    echo json_encode(["error" => "Token no proporcionado o inválido"]);
+    exit();
+}
 
 $pdo = new Conexion();
 
@@ -41,19 +51,21 @@ try {
 
         echo json_encode(["message" => "Préstamo actualizado correctamente"]);
     } else {
-        header("HTTP/1.1 400 Bad Request");
+        http_response_code(400);
         echo json_encode(["error" => "Datos incompletos"]);
     }
 } catch (PDOException $e) {
-    header("HTTP/1.1 500 Internal Server Error");
+    http_response_code(500);
     echo json_encode(["error" => "Error en el servidor", "details" => $e->getMessage()]);
 }
 
+// Preflight para CORS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 ?>
+
 
 
 

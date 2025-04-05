@@ -6,6 +6,15 @@ header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json; charset=UTF-8");
 
 require_once 'conexionDB.php';
+require_once 'auth.php'; // Usamos tu archivo de autenticación
+
+$token = $_GET['Token'] ?? null;
+
+if (!$token || !$auth->authenticateToken($token)) {
+    http_response_code(403);
+    echo json_encode(["error" => "Token no proporcionado o inválido"]);
+    exit();
+}
 
 $pdo = new Conexion();
 
@@ -33,19 +42,21 @@ try {
 
         echo json_encode(["message" => "Préstamo creado correctamente"]);
     } else {
-        header("HTTP/1.1 400 Bad Request");
+        http_response_code(400);
         echo json_encode(["error" => "Datos incompletos"]);
     }
 } catch (PDOException $e) {
-    header("HTTP/1.1 500 Internal Server Error");
+    http_response_code(500);
     echo json_encode(["error" => "Error en el servidor", "details" => $e->getMessage()]);
 }
 
+// Preflight para CORS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 ?>
+
 
 
 
