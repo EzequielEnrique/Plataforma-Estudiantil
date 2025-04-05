@@ -1,9 +1,15 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: POST, PUT, OPTIONS");
+header("Access-Control-Allow-Methods: PUT, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+// Responder a preflight (OPTIONS) correctamente
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
 require_once 'conexionDB.php';
 require_once 'auth.php'; // Usamos tu archivo actual
@@ -59,11 +65,8 @@ try {
     echo json_encode(["error" => "Error en el servidor", "details" => $e->getMessage()]);
 }
 
-// Preflight para CORS
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit();
-}
+
+
 ?>
 
 

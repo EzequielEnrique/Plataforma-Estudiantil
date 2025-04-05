@@ -25,14 +25,15 @@ export class PrestamoService {
   updatePrestamo(id: number, prestamo: any): Observable<any> {
     const token = localStorage.getItem('Token');
     const updatedPrestamo = { id, ...prestamo };
-    return this.http.post(`${this.baseUrl}/actualizarPrestamo.php?Token=${token}`, updatedPrestamo);
+    return this.http.put(`${this.baseUrl}/actualizarPrestamo.php?Token=${token}`, updatedPrestamo);
   }
   
 
   deletePrestamo(id: number): Observable<any> {
     const token = localStorage.getItem('Token');
-    return this.http.post(`${this.baseUrl}/eliminarPrestamo.php?Token=${token}`, { id });
+    return this.http.delete(`${this.baseUrl}/eliminarPrestamo.php?Token=${token}&id=${id}`);
   }
+  
 }
 
 

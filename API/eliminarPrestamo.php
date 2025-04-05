@@ -6,6 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
+
 require_once 'conexionDB.php';
 require __DIR__ . '/../vendor/autoload.php'; // Asegurate que esté correctamente ubicado
 use \Firebase\JWT\JWT;
@@ -42,16 +43,17 @@ try {
         // Leer el body para obtener el ID
         $data = json_decode(file_get_contents("php://input"), true);
 
-        if (!empty($data['id'])) {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
             $sql = $pdo->prepare("DELETE FROM prestamos WHERE id = :id");
-            $sql->bindValue(':id', $data['id']);
+            $sql->bindValue(':id', $id);
             $sql->execute();
-
+        
             echo json_encode(["message" => "Préstamo eliminado correctamente"]);
         } else {
             http_response_code(400);
             echo json_encode(["error" => "ID no proporcionado"]);
-        }
+        }        
     } catch (Exception $e) {
         http_response_code(403);
         echo json_encode(['error' => 'Token inválido o expirado']);
