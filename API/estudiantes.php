@@ -4,12 +4,38 @@ header("Access-Control-Allow-Headers: access");
 header("Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: token, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-
 
 require_once 'conexionDB.php';
+require_once 'auth.php'; // <--- Incluí tu auth.php
 
-// Maneja la solicitud según el método HTTP
+$pdo = new Conexion();
+$auth = new Authentication($_ENV['SECRET_KEY']); // Ya está seteado desde auth.php
+
+// Obtener el token desde la URL (como querés)
+if (!isset($_GET['Authorization'])) {
+    http_response_code(401);
+    echo json_encode(['error' => 'Token no proporcionado']);
+    exit;
+}
+
+$token = $_GET['Authorization'];
+
+// Validar token con el método de tu clase
+$payload = $auth->authenticateToken($token);
+
+if (!$payload) {
+    http_response_code(401);
+    echo json_encode(['error' => 'Token inválido o expirado']);
+    exit;
+}
+
+// ✅ Si el token es válido, se puede acceder a los datos así:
+$idUsuario = $payload->data->id;
+$rolUsuario = $payload->data->role;
+
+// Podés usar esos valores para verificar permisos si querés
+// Por ahora sigue con el CRUD normalmente:
+
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         handleGetRequest($pdo);
@@ -24,7 +50,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
         handleDeleteRequest($pdo);
         break;
     case 'OPTIONS':
-        // Maneja las solicitudes preflight
         header("HTTP/1.1 200 OK");
         break;
     default:
