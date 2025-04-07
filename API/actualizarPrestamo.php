@@ -5,16 +5,16 @@ header("Access-Control-Allow-Methods: PUT, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Responder a preflight (OPTIONS) correctamente
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 
 require_once 'conexionDB.php';
-require_once 'auth.php'; // Usamos tu archivo actual
+require_once 'auth.php'; 
 
-// Obtenemos y validamos el token desde GET
+
 $token = $_GET['Token'] ?? null;
 
 if (!$token || !$auth->authenticateToken($token)) {

@@ -12,19 +12,19 @@ require_once 'conexionDB.php';
 require_once 'auth.php';
 
 $conexion = new Conexion();
-$auth = new Authentication($_ENV['SECRET_KEY']); // Usa la clave secreta de auth.php
+$auth = new Authentication($_ENV['SECRET_KEY']); 
 
-// Obtener los datos enviados en el cuerpo de la petición
+
 $data = json_decode(file_get_contents('php://input'), true);
 
-// Verificar si el Token está presente
+
 if (!isset($data['Token']) || empty($data['Token'])) {
     echo json_encode(['error' => 'Token no proporcionado']);
     http_response_code(401);
     exit;
 }
 
-// Autenticar el Token
+
 $token = $data['Token'];
 $decoded = $auth->authenticateToken($token);
 

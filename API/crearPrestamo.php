@@ -6,7 +6,7 @@ header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json; charset=UTF-8");
 
 require_once 'conexionDB.php';
-require_once 'auth.php'; // Usamos tu archivo de autenticación
+require_once 'auth.php'; 
 
 $token = $_GET['Token'] ?? null;
 

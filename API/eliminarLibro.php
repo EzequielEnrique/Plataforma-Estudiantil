@@ -25,19 +25,19 @@ try {
 
     $token = $_GET['Token'];
 
-    // Verificar el token
+    
     try {
         $decoded = JWT::decode($token, new Key($key, 'HS256'));
-        $rol = $decoded->data->role; // Extrae el rol del usuario
+        $rol = $decoded->data->role; 
 
-        // Solo permitir la eliminación si el usuario es "Admin" o tiene permisos
+        
         if ($rol !== 'Bibliotecario') {
             echo json_encode(['error' => 'No tienes permisos para eliminar libros']);
             http_response_code(403);
             exit;
         }
 
-        // Si tiene permisos, proceder con la eliminación
+        
         if (!isset($_GET['id'])) {
             echo json_encode(['error' => 'ID no proporcionado']);
             http_response_code(400);

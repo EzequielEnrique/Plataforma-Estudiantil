@@ -8,11 +8,11 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 
 require_once 'conexionDB.php';
-require __DIR__ . '/../vendor/autoload.php'; // Asegurate que esté correctamente ubicado
+require __DIR__ . '/../vendor/autoload.php'; 
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
 
-// Cargar la clave secreta desde .env
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 $key = $_ENV['SECRET_KEY'];
@@ -20,7 +20,7 @@ $key = $_ENV['SECRET_KEY'];
 $pdo = new Conexion();
 
 try {
-    // Verificar si se envió el token
+    
     if (!isset($_GET['Token'])) {
         echo json_encode(['error' => 'Token no proporcionado']);
         http_response_code(403);
@@ -30,7 +30,7 @@ try {
     $token = $_GET['Token'];
 
     try {
-        // Decodificar el token
+        
         $decoded = JWT::decode($token, new Key($key, 'HS256'));
         $rol = $decoded->data->role;
 
@@ -40,7 +40,7 @@ try {
             exit;
         }
 
-        // Leer el body para obtener el ID
+        
         $data = json_decode(file_get_contents("php://input"), true);
 
         if (isset($_GET['id'])) {
@@ -63,7 +63,7 @@ try {
     echo json_encode(["error" => "Error en el servidor", "details" => $e->getMessage()]);
 }
 
-// Manejo de preflight
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();

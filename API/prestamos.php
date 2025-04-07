@@ -12,7 +12,7 @@ $pdo = new Conexion();
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        // Listar todos los préstamos
+        
         $stmt = $pdo->query("
             SELECT p.id, per.perNombre, per.perDni, l.titulo 
             FROM prestamos p
@@ -23,7 +23,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
     case 'POST':
-        // Crear un nuevo préstamo
+        
         $data = json_decode(file_get_contents("php://input"), true);
         $stmt = $pdo->prepare("INSERT INTO prestamos (idPersona, idLibro) VALUES (:idPersona, :idLibro)");
         $stmt->execute([
@@ -34,7 +34,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
     case 'PUT':
-        // Actualizar un préstamo
+        
         parse_str(file_get_contents("php://input"), $data);
         $stmt = $pdo->prepare("UPDATE prestamos SET idPersona = :idPersona, idLibro = :idLibro WHERE id = :id");
         $stmt->execute([
@@ -45,7 +45,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         echo json_encode(['message' => 'Préstamo actualizado']);
         break;
 
-// DELETE revisado para aceptar id en query params
+
 case 'DELETE':
     $id = $_GET['id'] ?? null;
     if ($id) {

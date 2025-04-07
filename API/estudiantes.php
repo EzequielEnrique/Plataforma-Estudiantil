@@ -6,12 +6,12 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: token, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 require_once 'conexionDB.php';
-require_once 'auth.php'; // <--- Incluí tu auth.php
+require_once 'auth.php'; 
 
 $pdo = new Conexion();
-$auth = new Authentication($_ENV['SECRET_KEY']); // Ya está seteado desde auth.php
+$auth = new Authentication($_ENV['SECRET_KEY']); 
 
-// Obtener el token desde la URL (como querés)
+
 if (!isset($_GET['Authorization'])) {
     http_response_code(401);
     echo json_encode(['error' => 'Token no proporcionado']);
@@ -20,7 +20,7 @@ if (!isset($_GET['Authorization'])) {
 
 $token = $_GET['Authorization'];
 
-// Validar token con el método de tu clase
+
 $payload = $auth->authenticateToken($token);
 
 if (!$payload) {
@@ -29,12 +29,11 @@ if (!$payload) {
     exit;
 }
 
-// ✅ Si el token es válido, se puede acceder a los datos así:
+//  Si el token es válido, se puede acceder a los datos así:
 $idUsuario = $payload->data->id;
 $rolUsuario = $payload->data->role;
 
-// Podés usar esos valores para verificar permisos si querés
-// Por ahora sigue con el CRUD normalmente:
+
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -57,7 +56,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 }
 
-// Maneja solicitudes GET
+
 function handleGetRequest($pdo) {
    
     if (isset($_GET['idPersona'])) {
@@ -109,11 +108,11 @@ function handleGetRequest($pdo) {
 // Maneja solicitudes POST
 function handlePostRequest($pdo) {
     $data = json_decode(file_get_contents("php://input"));
-    // Verifica si se proporciona 'ediNombre'
+    
     if (isset($data->ediNombre)) {
         $sql = "INSERT INTO estudiante (ediDireccion,ediEmail,ediNombre,ediTelefono,LocalidadID) 
         VALUES ((:ediDireccion), (:ediEmail),(:ediNombre),(:ediTelefono),(:LocalidadID))";
-        //$sql = "INSERT INTO estudiante (ediNombre) VALUES (:ediNombre)";
+        
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':ediDireccion', $data->ediDireccion);
         $stmt->bindParam(':ediEmail', $data->ediEmail);
@@ -158,7 +157,7 @@ function handlePutRequest($pdo) {
         $stmt->bindParam(':idestudiante', $data->idestudiante);
         if ($stmt->execute()) {
             header("HTTP/1.1 200 OK");
-            echo json_encode(['message' => 'Actualización exitosa']); // Retorna un mensaje de éxito
+            echo json_encode(['message' => 'Actualización exitosa']); 
         } else {
             header("HTTP/1.1 500 Internal Server Error");
             echo json_encode(['error' => 'No se pudo actualizar la estudiante']);

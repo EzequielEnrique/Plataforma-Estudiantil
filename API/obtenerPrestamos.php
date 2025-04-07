@@ -10,7 +10,7 @@ require __DIR__ . '/../vendor/autoload.php';
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
 
-// Cargar clave secreta desde .env
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 $key = $_ENV['SECRET_KEY'];
@@ -18,7 +18,7 @@ $key = $_ENV['SECRET_KEY'];
 $pdo = new Conexion();
 
 try {
-    // Verificar token
+    
     if (!isset($_GET['Token'])) {
         echo json_encode(['error' => 'Token no proporcionado']);
         http_response_code(403);
@@ -28,11 +28,11 @@ try {
     $token = $_GET['Token'];
 
     try {
-        // Decodificar el token
+        
         $decoded = JWT::decode($token, new Key($key, 'HS256'));
         $rol = $decoded->data->role;
 
-        // Si no es bibliotecario ni estudiante, no tiene acceso
+        
         if ($rol !== 'Bibliotecario' && $rol !== 'Estudiante') {
             echo json_encode(['error' => 'No tienes permisos para ver los préstamos']);
             http_response_code(403);
@@ -41,7 +41,7 @@ try {
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if (isset($_GET['id'])) {
-                // Obtener un préstamo por ID
+                
                 $sql = $pdo->prepare("
                     SELECT id, nombre, apellido, dni, libro, fecha_prestamo, fecha_devolucion 
                     FROM prestamos 
@@ -53,7 +53,7 @@ try {
 
                 echo $result ? json_encode($result) : json_encode(["message" => "Préstamo no encontrado"]);
             } else {
-                // Obtener todos los préstamos
+                
                 $sql = $pdo->prepare("
                     SELECT id, nombre, apellido, dni, libro, fecha_prestamo, fecha_devolucion 
                     FROM prestamos

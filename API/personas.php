@@ -12,7 +12,7 @@ include 'auth.php';
 $pdo = new Conexion();
 $auth = new Authentication($key);
 
-// Maneja la solicitud según el método HTTP
+
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         handleGetPersona($pdo, $auth);
@@ -21,7 +21,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         updatePersona($pdo, $auth);
         break;
     case 'OPTIONS':
-        // Maneja las solicitudes preflight
+        
         header("HTTP/1.1 200 OK");
         http_response_code(200);
         break;
@@ -30,7 +30,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 }
 
-// Maneja solicitudes GET para obtener datos del estudiante
+
 function handleGetPersona($pdo, $auth) {
     $token = $_GET['Authorization'];
 

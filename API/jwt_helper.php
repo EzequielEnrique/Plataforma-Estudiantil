@@ -6,7 +6,7 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization');
 header('Access-Control-Allow-Credentials: true');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    // Si es una solicitud de preflight, terminamos aquí.
+    
     http_response_code(200);
     exit();
 }
@@ -17,14 +17,14 @@ use Firebase\JWT\Key;
 require __DIR__ . '/../vendor/autoload.php';
 
 class JWT_Helper {
-    private static $key = 'secreto'; // Clave secreta para el JWT (cámbiala por una segura)
+    private static $key = 'secreto'; // Clave secreta para el JWT 
 
     public static function encode($payload) {
         return JWT::encode($payload, self::$key, 'HS256');
     }
 
     public static function decode($jwt) {
-        return JWT::decode($jwt, new Key(self::$key, 'HS256')); // Usa `Key` para definir el algoritmo
+        return JWT::decode($jwt, new Key(self::$key, 'HS256')); 
     }
 }
 ?>
