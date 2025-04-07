@@ -16,7 +16,7 @@ $dotenv->load();
 
 $pdo = new Conexion();
 $key = $_ENV['SECRET_KEY']; 
-$auth = new Authentication($key); // Pasar la clave secreta al constructor
+$auth = new Authentication($key); 
 
 
 
@@ -24,7 +24,7 @@ class Authentication {
     private $claveSecreta;
 
     public function __construct($claveSecreta) {
-        $this->claveSecreta = $claveSecreta; // Asigna la clave secreta correctamente
+        $this->claveSecreta = $claveSecreta; 
     }
 
     /**

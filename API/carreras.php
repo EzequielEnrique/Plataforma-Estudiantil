@@ -25,7 +25,7 @@ require_once 'conexionDB.php';
 
             elseif(isset($_GET['carNombre'])){
                 $carNombre = $_GET['carNombre'];
-                $carNombre = strtolower($carNombre); // Convertir a minúsculas
+                $carNombre = strtolower($carNombre); 
                 $sql = $pdo->prepare("SELECT * FROM carreras WHERE LOWER(carNombre) LIKE :carNombre");
                 $sql->bindValue(':carNombre', '%' . $carNombre . '%', PDO::PARAM_STR);
                 $sql->execute();
@@ -34,7 +34,7 @@ require_once 'conexionDB.php';
                 echo json_encode($sql->fetchAll());
                 exit;
             } elseif (isset($_GET['carreraID'])) {
-                // Obtener asignaturas por ID de carrera
+                
                 $carreraID = $_GET['carreraID'];
                 $sql = $pdo->prepare("SELECT * FROM asignaturas WHERE carreraID=:carreraID");
                 $sql->bindValue(':carreraID', $carreraID);
@@ -75,25 +75,25 @@ require_once 'conexionDB.php';
     }
 
     if($_SERVER['REQUEST_METHOD'] == 'PUT'){
-        // Obtener los datos enviados mediante la solicitud PUT
+        
         $data = json_decode(file_get_contents("php://input"), true);
         
-        // Verificar si se proporciona un ID de carrera y al menos el campo 'carNombre'
+        
         if (isset($data['idCarreras']) && isset($data['carNombre'])) {
             $carreraId = $data['idCarreras'];
             $carNombre = $data['carNombre'];
         
-            // Construir la consulta SQL para actualizar el nombre de la carrera
+            
             $sql = "UPDATE carreras SET carNombre = :carNombre WHERE idCarreras = :idCarreras";
         
-            // Preparar la consulta
+            
             $stmt = $pdo->prepare($sql);
         
-            // Vincular los valores y ejecutar la consulta
+            
             $stmt->bindParam(':carNombre', $carNombre);
             $stmt->bindParam(':idCarreras', $carreraId);
         
-            // Ejecutar la consulta
+            
             try {
                 $stmt->execute();
                 echo json_encode(array("mensaje" => "Actualización exitosa"));
@@ -104,7 +104,7 @@ require_once 'conexionDB.php';
             echo json_encode(array("error" => "Se requiere un ID de carrera y el campo 'carNombre'"));
         }
         
-        // Cerrar la conexión
+        
         $pdo = null;
             }
 
