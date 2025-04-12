@@ -13,11 +13,16 @@ export class CarrerasService {
 
   // Método para obtener todas las Carreras
   getCarreras(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}`);
+    const token = localStorage.getItem('Token');
+    return this.http.get<any[]>(`${this.apiUrl}?Token=${token}`);
   }
 
   updateCarrera(id: number, nuevoNombre: string): Observable<any> {
-    const body = {id: id, carNombre: nuevoNombre,};   
-       return this.http.put(`${this.apiUrl}`, body);
-}
+    const token = localStorage.getItem('Token');
+    const body = {
+      idCarreras: id,
+      carNombre: nuevoNombre
+    };
+    return this.http.put(`${this.apiUrl}?Token=${token}`, body);
+  }
 }
