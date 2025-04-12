@@ -12,13 +12,13 @@ $pdo = new Conexion();
 $auth = new Authentication($_ENV['SECRET_KEY']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    // Manejar preflight request
+    
     header("HTTP/1.1 204 No Content");
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
-    // Obtener el token desde la URL
+    
     if (!isset($_GET['Token']) || empty($_GET['Token'])) {
         header("HTTP/1.1 401 Unauthorized");
         echo json_encode(["error" => "Token no proporcionado"]);
@@ -32,17 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         exit;
     }
 
-    // Obtener los datos enviados en el cuerpo de la petición
+    
     $input = json_decode(file_get_contents("php://input"), true);
 
-    // Verificar que se envió un ID
+    
     if (!isset($input['id']) || empty($input['id'])) {
         header("HTTP/1.1 400 Bad Request");
         echo json_encode(["error" => "El ID es requerido"]);
         exit;
     }
 
-    // Verificar si hay datos para actualizar
+    
     $fields = [];
     $params = [':id' => $input['id']];
 
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         exit;
     }
 
-    // Construir y ejecutar la consulta SQL
+    
     $sql = "UPDATE librosdebase SET " . implode(", ", $fields) . " WHERE id = :id";
     $stmt = $pdo->prepare($sql);
 

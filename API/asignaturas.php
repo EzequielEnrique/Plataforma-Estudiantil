@@ -5,14 +5,14 @@ header("Access-Control-Allow-Methods: GET,POST,DELETE,PUT");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Conexión y autenticación
+
 require_once 'conexionDB.php';
-require_once 'auth.php'; // ← Añadimos la autenticación
+require_once 'auth.php'; 
 
 $pdo = new Conexion();
-$auth = new Authentication($_ENV['SECRET_KEY']); // ← Inicializamos auth
+$auth = new Authentication($_ENV['SECRET_KEY']); 
 
-// Obtener token de la URL
+
 if (!isset($_GET['Authorization'])) {
     http_response_code(401);
     echo json_encode(['error' => 'Token no proporcionado']);
@@ -22,18 +22,18 @@ if (!isset($_GET['Authorization'])) {
 $token = $_GET['Authorization'];
 $payload = $auth->authenticateToken($token);
 
-// Validar token
+
 if (!$payload) {
     http_response_code(401);
     echo json_encode(['error' => 'Token inválido o expirado']);
     exit;
 }
 
-// ✅ Opcional: Podés acceder al ID del usuario o rol así:
+
 $idUsuario = $payload->data->id;
 $rolUsuario = $payload->data->role;
 
-// Métodos
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['id'])) {
         $sql = $pdo->prepare("SELECT * FROM asignaturas WHERE idAsignaturas=:id");

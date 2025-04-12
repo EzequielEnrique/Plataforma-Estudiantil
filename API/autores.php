@@ -6,12 +6,12 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 require_once 'conexionDB.php';
-require_once 'auth.php'; // Archivo que maneja la autenticación
+require_once 'auth.php'; 
 
 $pdo = new Conexion();
-$auth = new Authentication($_ENV['SECRET_KEY']); // Crear instancia de autenticación
+$auth = new Authentication($_ENV['SECRET_KEY']); 
 
-// Obtener el token desde la URL
+
 if (!isset($_GET['Authorization'])) {
     header("HTTP/1.1 401 Unauthorized");
     echo json_encode(["error" => "Token no proporcionado"]);
@@ -21,14 +21,14 @@ if (!isset($_GET['Authorization'])) {
 $token = $_GET['Authorization'];
 $decodedToken = $auth->authenticateToken($token);
 
-// Verificar si el token es válido
+
 if (!$decodedToken) {
     header("HTTP/1.1 401 Unauthorized");
     echo json_encode(["error" => "Token inválido"]);
     exit;
 }
 
-// Maneja la solicitud según el método HTTP
+
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         handleGetRequest($pdo, $auth);
@@ -50,7 +50,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 }
 
-// Maneja solicitudes GET
+
 function handleGetRequest($pdo, $auth) {
     if (isset($_GET['idAutor'])) {
         $sql = $pdo->prepare("SELECT * FROM Autores WHERE idAutor=:idAutor");
@@ -69,7 +69,7 @@ function handleGetRequest($pdo, $auth) {
     exit;
 }
 
-// Maneja solicitudes POST
+
 function handlePostRequest($pdo, $auth) {
     $data = json_decode(file_get_contents("php://input"));
     
@@ -104,7 +104,7 @@ function handlePostRequest($pdo, $auth) {
     exit;
 }
 
-// Maneja solicitudes PUT
+
 function handlePutRequest($pdo, $auth) {
     $data = json_decode(file_get_contents("php://input"));
     
@@ -133,7 +133,7 @@ function handlePutRequest($pdo, $auth) {
     exit;
 }
 
-// Maneja solicitudes DELETE
+
 function handleDeleteRequest($pdo, $auth) {
     if (isset($_GET['idAutor'])) {
         $sql = "DELETE FROM Autores WHERE idAutor=:idAutor";
