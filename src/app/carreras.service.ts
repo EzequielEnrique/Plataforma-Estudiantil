@@ -11,7 +11,7 @@ export class CarrerasService {
 
   constructor(private http: HttpClient) {}
 
-  // Método para obtener todas las Carreras
+  
   getCarreras(): Observable<any[]> {
     const token = localStorage.getItem('Token');
     return this.http.get<any[]>(`${this.apiUrl}?Token=${token}`);
