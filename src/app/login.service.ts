@@ -27,7 +27,7 @@ export class LoginService {
       })
     );
   }
-  //Método que devuelve si el login es válido
+  
   isAuthenticate(): boolean {
     const token: any = localStorage.getItem('Token');
     
@@ -35,8 +35,8 @@ export class LoginService {
       return false;
     }else{
       const decoded: any = jwtDecode(token);
-      const fechaActual = Date.now() / 1000; //Convertir a segundos
-      //Devuelve falso si el token es válido
+      const fechaActual = Date.now() / 1000; 
+      
       if (decoded.exp < fechaActual){
         return false;
       }else {

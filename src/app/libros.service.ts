@@ -16,13 +16,13 @@ export class LibrosService {
   
 
   createLibro(libro: any): Observable<any> {
-    const token = localStorage.getItem('Token'); // Obtener el Token almacenado
+    const token = localStorage.getItem('Token'); 
     if (!token) {
       console.error('Token no encontrado');
-      return new Observable(); // Devolver un Observable vacío si no hay Token
+      return new Observable(); 
     }
   
-    const body = { ...libro, Token: token }; // Agregar el Token al cuerpo de la petición
+    const body = { ...libro, Token: token }; 
     return this.http.post<any>(`${this.apiUrl}/crearLibro.php`, body);
   }
   

@@ -14,24 +14,24 @@ export class InscripcionesService {
 
   constructor(private http: HttpClient) { }
 
-  // Método para buscar inscripciones por DNI
+  
   buscarInscripcionesPorDNI(dni: string): Observable<any> {
     const url = `${this.apiUrl}?dni=${dni}`;
     return this.http.get(url);
   }
 
-  // Método para buscar inscripciones por DNI
+  
   buscarInsDNI(estDNI: string): Observable<any> {
     const url = `${this.urlIns}?estDNI=${estDNI}`;
     return this.http.get(url);
   }
 
-  //Método para obtener Turnos
+  
   getTurnosActivos() {
     return this.http.get<any[]>(`http://localhost/Final/API/turnos.php?turEstado=1`)
   }
 
-  // Método para crear una inscripción con datos JSON
+  
   crearInscripcion(datos: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

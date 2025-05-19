@@ -21,8 +21,7 @@ export class ServiciosUsuariosService {
     return this.clienteHttp.put(this.apiUrl, usData);
   }
 
-  //Guardo los datos de la persona para utilizarlo en otros componentes
-  //Datos de Servicio (DataService)
+  
   getUsuarioData() {
     return this.perData;
   }
